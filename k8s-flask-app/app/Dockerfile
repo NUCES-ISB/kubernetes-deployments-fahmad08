@@ -1,16 +1,17 @@
 # Use Python 3.9 as base image
 FROM python:3.9
 
-# Set working directory inside the container
+# Set the working directory inside the container
 WORKDIR /app
 
 # Copy application files
 COPY app.py requirements.txt ./
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt  # Ensure Flask & psycopg2 are installed
 
-# Expose the Flask app port
+# Expose Flask app port
 EXPOSE 5000
 
 # Run the Flask app
